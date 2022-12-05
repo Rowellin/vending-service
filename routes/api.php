@@ -23,3 +23,6 @@ Route::get('/ping', function () {
         'message' => 'pong 2'
     ]);
 });
+
+Route::post('/invoice', 'Api\VendingController@invoice');
+Route::post('/callback', 'Api\VendingController@callback');
