@@ -20,6 +20,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('/ping', function () {
     return response()->json([
-        'message' => 'pong'
+        'message' => 'pong 2'
     ]);
 });
