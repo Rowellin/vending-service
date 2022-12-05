@@ -47,6 +47,12 @@ return [
             'level' => 'debug',
         ],
 
+        'xendit' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/xendit.log'),
+            'level' => 'debug',
+        ],
+
         'daily' => [
             'driver' => 'daily',
             'path' => storage_path('logs/laravel.log'),
