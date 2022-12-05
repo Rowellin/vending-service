@@ -1,0 +1,5 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/rowy1681/public_html/vending-service/
+    - /bin/cp * $DEPLOYPATH
