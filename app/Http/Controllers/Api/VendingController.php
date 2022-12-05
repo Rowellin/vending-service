@@ -45,7 +45,7 @@ class VendingController extends Controller
             $data = Invoice::create($invoice);
 
             if ($vending = Vending::where('name', $request->vending)->first()) {
-                $vending->update(['status' => 'payment']);
+                $vending->update(['status' => 'payment', 'xendit_id' => $res['id']]);
             }
 
             DB::commit();
@@ -64,6 +64,7 @@ class VendingController extends Controller
         }
 
         Invoice::where('xendit_id', $request->id)->update(['status' => strtolower($request->status)]);
+        Vending::where('xendit_id', $request->id)->update(['status' => 'ready', 'xendit_id' => null]);
 
         return $this->success('received');
     }
