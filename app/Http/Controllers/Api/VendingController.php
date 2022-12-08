@@ -90,7 +90,10 @@ class VendingController extends Controller
                 return $this->failure($validator->errors()->first(), 400);
             }
 
-            $data = $this->service->getProductReady($this->service->getProductAvailable($request));
+            $data = $this->service->getProductReady(
+                $this->service->getProductAvailable($request),
+                $this->service->getProductSold($request->vending)
+            );
 
             return $this->success($data);
         } catch (\Throwable $th) {

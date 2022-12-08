@@ -61,19 +61,18 @@ class VendingService
     return $productsAvailable;
   }
 
-  protected function getProductSold()
+  public function getProductSold($vending)
   {
     return Invoice::where('status', 'paid')
+      ->where('vending', $vending)
       ->whereDate('created_at', today())
       ->groupBy('product')
       ->get(['product', DB::raw('count(*) as total')])
       ->toArray();
   }
 
-  public function getProductReady($productsAvailable)
+  public function getProductReady($productsAvailable, $productsSold)
   {
-    $productsSold = $this->getProductSold();
-
     // accumulating current stock with current selling
     $productReady = [];
     foreach ($productsAvailable as $key => $product) {
