@@ -26,3 +26,4 @@ Route::get('/ping', function () {
 
 Route::post('/invoice', 'Api\VendingController@invoice');
 Route::post('/callback', 'Api\VendingController@callback');
+Route::get('/products', 'Api\VendingController@products');
