@@ -25,6 +25,7 @@ Route::get('/ping', function () {
 });
 
 Route::middleware(['auth.basic.api'])->group(function () {
+    Route::post('/login', 'Api\VendingController@login');
     Route::post('/invoice', 'Api\VendingController@invoice');
     Route::get('/products', 'Api\VendingController@products');
 });

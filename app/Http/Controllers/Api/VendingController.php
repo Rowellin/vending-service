@@ -6,9 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Models\Invoice;
 use App\Models\Vending;
 use App\Services\VendingService;
+use App\User;
 use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 
@@ -19,6 +21,17 @@ class VendingController extends Controller
     public function __construct(VendingService $service)
     {
         $this->service = $service;
+    }
+
+    public function login(Request $request)
+    {
+        $user = User::where('user', $request->user)->first();
+
+        if ($user && Hash::check($request->password, $user->password)) {
+            return $this->success();
+        } else {
+            return $this->failure('Unauthorized', '401');
+        }
     }
 
     public function invoice(Request $request)
