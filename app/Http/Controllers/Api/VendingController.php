@@ -113,4 +113,25 @@ class VendingController extends Controller
             return $this->failure($th->getMessage(), 500);
         }
     }
+
+    public function vendingCheck(Request $request)
+    {
+        try {
+            $validator = Validator::make($request->all(), [
+                'vending' => 'required',
+            ]);
+
+            if ($validator->fails()) {
+                return $this->failure($validator->errors()->first(), 400);
+            }
+
+            if (Vending::where('name', $request->vending)->exists()) {
+                return $this->success();
+            } else {
+                return $this->failure('Not Found', 404);
+            }
+        } catch (\Throwable $th) {
+            return $this->failure($th->getMessage(), 500);
+        }
+    }
 }

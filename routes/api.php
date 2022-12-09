@@ -28,6 +28,7 @@ Route::middleware(['auth.basic.api'])->group(function () {
     Route::post('/login', 'Api\VendingController@login');
     Route::post('/invoice', 'Api\VendingController@invoice');
     Route::get('/products', 'Api\VendingController@products');
+    Route::get('/vending-check', 'Api\VendingController@vendingCheck');
 });
 
 Route::post('/callback', 'Api\VendingController@callback');
