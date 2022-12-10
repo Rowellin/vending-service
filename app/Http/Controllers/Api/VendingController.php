@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class VendingController extends Controller
@@ -108,7 +109,12 @@ class VendingController extends Controller
                 $this->service->getProductSold($request->vending)
             );
 
-            return $this->success($data);
+            return $this->success([
+                'bg_image' => Storage::disk('public')->exists('bg.jpg')
+                    ? Storage::disk('public')->url('bg.jpg')
+                    : null,
+                'products' => $data,
+            ]);
         } catch (\Throwable $th) {
             return $this->failure($th->getMessage(), 500);
         }

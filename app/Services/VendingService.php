@@ -29,7 +29,7 @@ class VendingService
     $productsAvailable = [];
     for ($i = 1; $i <= 100; $i++) {
       if ($products["Produk$i"] !== "KOSONG") {
-        $imageName = strtolower(str_replace(' ', '_', $products["Produk$i"])) . '.jpg';
+        $imageName = "drinks/" . strtolower(str_replace(' ', '_', $products["Produk$i"])) . '.jpg';
 
         $productsAvailable[] = [
           'name' => $products["Produk$i"],
