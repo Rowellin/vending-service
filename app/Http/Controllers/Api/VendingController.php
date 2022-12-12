@@ -65,7 +65,7 @@ class VendingController extends Controller
             $data['expired'] = $expired->getTimestamp() - now()->getTimestamp();
 
             if ($vending = Vending::where('name', $request->vending)->first()) {
-                $vending->update(['status' => 'payment', 'xendit_id' => $res['id']]);
+                $vending->update(['status' => 'payment', 'xendit_id' => $res['id'], 'product' => $request->product]);
             }
 
             DB::commit();
