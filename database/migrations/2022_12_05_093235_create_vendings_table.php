@@ -18,6 +18,7 @@ class CreateVendingsTable extends Migration
             $table->string('name');
             $table->string('status')->default('ready');
             $table->string('xendit_id')->nullable();
+            $table->string('product')->nullable();
             $table->timestamps();
         });
     }
