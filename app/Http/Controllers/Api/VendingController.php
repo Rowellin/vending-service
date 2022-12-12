@@ -85,7 +85,10 @@ class VendingController extends Controller
             }
 
             Invoice::where('xendit_id', $request->id)->update(['status' => strtolower($request->status)]);
-            Vending::where('xendit_id', $request->id)->update(['status' => 'processing', 'xendit_id' => null]);
+            Vending::where('xendit_id', $request->id)->update([
+                'status' => strtolower($request->status) == 'paid' ? 'processing' : 'ready',
+                'xendit_id' => null
+            ]);
 
             return $this->success('received');
         } catch (\Throwable $th) {
