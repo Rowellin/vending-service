@@ -113,9 +113,10 @@ class VendingController extends Controller
             );
 
             return $this->success([
-                'bg_image' => Storage::disk('public')->exists('bg.jpg')
+                'bg' => Storage::disk('public')->exists('bg.jpg')
                     ? Storage::disk('public')->url('bg.jpg')
                     : null,
+                'video' => Vending::where('name',  $request->vending)->first(['ln_video_uri', 'pt_video_uri']),
                 'products' => $data,
             ]);
         } catch (\Throwable $th) {
