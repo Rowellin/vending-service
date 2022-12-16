@@ -116,7 +116,7 @@ class VendingController extends Controller
                 'bg' => Storage::disk('public')->exists('bg.jpg')
                     ? Storage::disk('public')->url('bg.jpg')
                     : null,
-                'video' => Vending::where('name',  $request->vending)->first(['ln_video_uri', 'pt_video_uri']),
+                'video' => Vending::where('name',  $request->vending)->first(['ln_video_uri', 'pt_video_uri', 'switch_screen']),
                 'products' => $data,
             ]);
         } catch (\Throwable $th) {
